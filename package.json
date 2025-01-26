@@ -1,0 +1,20 @@
+{
+  "name": "forahia-todo-list",
+  "version": "1.0.0",
+  "description": "A simple TODO list web application using Node.js, Express, EJS, and PostgreSQL.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": ["todo", "express", "ejs", "postgresql"],
+  "author": "Chijindu Nwokeohuru",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "pg": "^8.11.3"
+  }
+}
