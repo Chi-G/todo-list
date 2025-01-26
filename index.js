@@ -33,6 +33,17 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.get("/sort", async (req, res) => {
+  const order = req.query.order || 'asc';
+  try {
+    const result = await db.query(`SELECT * FROM items ORDER BY created_at ${order.toUpperCase()}`);
+    res.json(result.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error sorting items");
+  }
+});
+
 app.post("/add", async (req, res) => {
   const item = req.body.newItem;
   const createdAt = new Date();

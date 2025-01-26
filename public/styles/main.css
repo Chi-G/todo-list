@@ -39,6 +39,10 @@ form.edit {
   display: flex;
 }
 
+form.delete {
+  display: flex;
+}
+
 .item {
   min-height: 70px;
   display: flex;
@@ -127,7 +131,7 @@ footer {
 .sort-buttons {
   display: flex;
   justify-content: center;
-  margin-top: -10px; /* Adjust this value as needed to move it up */
+  margin-top: -10px;
   margin-bottom: 10px;
 }
 

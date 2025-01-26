@@ -6,11 +6,11 @@
     </h1>
 
     <div class="sort-buttons">
-      <a href="/?sort=asc" class="sort-button <%= sortOrder === 'asc' ? 'active' : '' %>">Sort Ascending</a>
-      <a href="/?sort=desc" class="sort-button <%= sortOrder === 'desc' ? 'active' : '' %>">Sort Descending</a>
+      <button class="sort-button" onclick="sortItems('asc')">Sort Ascending</button>
+      <button class="sort-button" onclick="sortItems('desc')">Sort Descending</button>
     </div>
   </div>
-  <div class="box">
+  <div class="box" id="items-container">
     <% for(let item of listItems){%>
       <div class="item">
         <form action="/delete" method="post">
@@ -51,6 +51,35 @@
       document.getElementById("edit" + id).setAttribute("hidden", true)
       document.getElementById("done" + id).removeAttribute("hidden")
       document.getElementById("input" + id).removeAttribute("hidden")
+    }
+
+    function sortItems(order) {
+      fetch(`/sort?order=${order}`)
+        .then(response => response.json())
+        .then(data => {
+          const itemsContainer = document.getElementById('items-container');
+          itemsContainer.innerHTML = '';
+          data.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `
+            <form class="delete" action="/delete" method="post">
+              <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="${item.id}">
+            </form>
+            <div class="item-content">
+              <p id="title${item.id}">${item.title}</p>
+              <p class="date-stamp">${new Date(item.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+            </div>
+            <form class="edit" action="/edit" method="post">
+              <input type="hidden" name="updatedItemId" value="${item.id}">
+              <input id="input${item.id}" type="text" name="updatedItemTitle" value="${item.title}" autocomplete="off" autofocus="true" hidden="true" />
+              <button id="done${item.id}" class="edit" type="submit" hidden><img class="icon" src="/assets/icons/check-solid.svg" alt="tick image"></button>
+            </form>
+            <button id="edit${item.id}" class="edit" onclick="handler('${item.id}')"><img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image"></button>
+          `;
+            itemsContainer.appendChild(itemDiv);
+          });
+        });
     }
   </script>
   <%- include('partials/footer.ejs'); -%>
