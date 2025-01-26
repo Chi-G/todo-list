@@ -123,3 +123,23 @@ footer {
   margin: 5px 0 10px 20px;
   font-style: italic;
 }
+
+.sort-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: -10px; /* Adjust this value as needed to move it up */
+  margin-bottom: 10px;
+}
+
+.sort-button {
+  background-color: #a683e3;
+  color: white;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.sort-button.active {
+  background-color: #5a3ea3;
+}

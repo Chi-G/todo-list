@@ -17,19 +17,16 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let items = [
-  { id: 1, title: "Buy milk" },
-  { id: 2, title: "Finish homework" }, 
-];
-
 app.get("/", async (req, res) => {
+  const sort = req.query.sort || 'asc';
   try {
-    const result = await db.query("SELECT * FROM items ORDER BY id ASC");
-    items = result.rows;
+    const result = await db.query(`SELECT * FROM items ORDER BY created_at ${sort.toUpperCase()}`);
+    const items = result.rows;
 
     res.render("index.ejs", {
       listTitle: "TODO LIST",
       listItems: items,
+      sortOrder: sort
     });
   } catch (err) {
     console.log(err);
