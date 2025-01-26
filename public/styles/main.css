@@ -4,16 +4,19 @@ html {
   min-height: 1000px;
   font-family: "helvetica neue";
 }
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   min-height: 95vh;
 }
+
 main {
   text-align: center;
   flex: 1 0 auto;
 }
+
 h1 {
   color: #fff;
   padding: 10px;
@@ -31,6 +34,7 @@ h1 {
   background-color: #a683e3;
   text-align: center;
 }
+
 form.edit {
   display: flex;
 }
@@ -110,4 +114,12 @@ footer {
   flex: 0 0 auto;
   color: white;
   text-align: center;
+}
+
+.date-stamp {
+  color: #870808;
+  font-size: 0.8em;
+  display: block;
+  margin: 5px 0 10px 20px;
+  font-style: italic;
 }

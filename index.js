@@ -38,9 +38,10 @@ app.get("/", async (req, res) => {
 
 app.post("/add", async (req, res) => {
   const item = req.body.newItem;
+  const createdAt = new Date();
   // items.push({title: item});
   try {
-    await db.query("INSERT INTO items (title) VALUES ($1)", [item]);
+    await db.query("INSERT INTO items (title, created_at) VALUES ($1, $2)", [item, createdAt]);
     res.redirect("/");
   } catch (err) {
     console.log(err);
